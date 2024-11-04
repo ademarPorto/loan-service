@@ -1,0 +1,22 @@
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        client_id:
+          description: Internal identification
+          type: string
+          format: uuid
+          example: '95538fe2-31cf-414b-89e2-879609e9812a'
+        name:
+          description: The client's name.
+          type: string
+          #Pattern used to validate empty strings.
+          pattern: '^(?!\s*$).+'
+        loans:
+          type: array
+          items:
+            $ref: "loan.yaml#/components/schemas/Loan"
+      required:
+        - client_id
+        - name

@@ -1,0 +1,7 @@
+components:
+  schemas:
+    ClientResponse:
+      type: object
+      properties:
+        client:
+          $ref: "client.yaml#/components/schemas/Client"

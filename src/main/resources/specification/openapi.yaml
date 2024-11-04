@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: Loan Service
+  description: Loan Service - Specification
+  version: "1.0.0"
+  contact:
+    name: Ademar Porto
+    email: ademar@outlook.com.br
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /v1/loan/calculate:
+    get:
+      tags:
+        - loan-controller
+      description:  Endpoint to calculate the EMI (Equated Monthly Installment).
+      operationId: calculateEmi
+      parameters:
+        - $ref: ./parameters/loan-value.yaml
+        - $ref: ./parameters/interest-rate.yaml
+        - $ref: ./parameters/loan-term.yaml
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "../models/loan-calculation-response.yaml#/components/schemas/LoanCalculationResponse"
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        401:
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        403:
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        404:
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        500:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        503:
+          description: Service Unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+  /v1/clients/{client-id}:
+    get:
+      tags:
+        - client-controller
+      description: Get the client by id.
+      operationId: getClientById
+      parameters:
+        - $ref: ./parameters/client-id.yaml
+
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "../models/client.yaml#/components/schemas/Client"
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        401:
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        403:
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        404:
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        500:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        503:
+          description: Service Unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+  /v1/client/loan:
+    post:
+      tags:
+        - client-controller
+      description: Endpoint to add a loan to clients.
+      operationId: addLoanToClient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../models/loan-request.yaml#/components/schemas/LoanRequest"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "../models/client-response.yaml#/components/schemas/ClientResponse"
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        401:
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        403:
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        404:
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        500:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        503:
+          description: Service Unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+    put:
+      tags:
+        - client-controller
+      description: Endpoint to update an existed loan.
+      operationId: updateClientLoan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../models/loan-request.yaml#/components/schemas/LoanRequest"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "../models/client-response.yaml#/components/schemas/ClientResponse"
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        401:
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        403:
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        404:
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        500:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        503:
+          description: Service Unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+
+  /v1/client/{client-id}/loan/{loan-id}:
+    delete:
+      tags:
+        - client-controller
+      description: Endpoint to delete a loan from client.
+      operationId: removeLoanFromClient
+      parameters:
+        - $ref: ./parameters/client-id.yaml
+        - $ref: ./parameters/loan-id.yaml
+      responses:
+        204:
+          description: Response representing that the loan was successfully deleted.
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        401:
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        403:
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        404:
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        500:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"
+        503:
+          description: Service Unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "../models/error.yaml#/components/schemas/Error"

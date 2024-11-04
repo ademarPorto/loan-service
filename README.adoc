@@ -1,0 +1,123 @@
+= Loan Service
+Ademar Porto <ademar@outlook.com.br>
+v1.0, 2024-November-04
+:toc:
+:toclevels: 5
+
+== Introduction
+This service is responsible to calculate Equated Monthly Installment (emi) and manage
+client loans.
+
+==== Main Feature
+    - Equated Monthly Installment (emi) calculator for home, car and personal loan.
+
+==== Additional Feature
+    - Calculate and store loan details for clients.
+
+== Stack
+
+- Java 21
+- Spring Boot 3
+- Flyway
+- PostgreSQL
+- Docker
+- OpenAPI specification
+- Lombok
+
+== Setup
+
+=== Requirement
+
+===== Java JDK
+
+You will need at least the Java 21 installed to build and run the application.
+
+=== Build the application
+
+To build the service, you can either use a locally installed version of maven or you can use the provided mavenwrapper.
+Depending on your choice, replace the command with the following:
+
+* `mvn` for using maven
+* `./mvnw` for the mavenwrapper on *nix environments
+* `./mvnw.cmd` for the mavenwrapper on Windows
+
+=== Useful maven commands
+This sub-section will describe a few handy maven commands, for a full overview of the maven lifecycle please refer to the [maven lifecycle page](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
+
+Compiling the project is done with the following maven command:
+[source,shell script]
+----
+mvn clean compile
+----
+This will compile the project but none of the tests will be run.
+
+Running the tests can be done with the following maven command:
+[source,shell script]
+----
+mvn clean test
+----
+This will also recompile the project if any changes have been detected.
+
+To package the project into a bootable jar file, use the following command:
+[source,shell script]
+----
+mvn clean package
+----
+This will also compile and run tests for the project if any changes have been detected.
+
+=== Running the service locally
+==== External Dependencies
+To be able to run this project, you need to be able to connect to a Postgres database.
+This can be achieved by running Postgres and setting the following spring profile: `local`.
+
+=== Running Postgres
+I've created a `docker-compose.yml` to make running Postgres easier.
+To use the docker-compose file to run, you need to have `docker` installed on your machine.
+If you want to start up Postgres through the docker-compose file use the following command from the root of the project:
+
+From the root of this project you can then run the following command:
+
+[source,shell script]
+----
+docker-compose -f docker-compose.yml up -d
+----
+
+=== Running the application
+After the project has been packaged and Postgres is running, the service can be run by executing the resulting `loan-service.jar`
+
+Provided that you have a JRE installed, this can be done with the following command:
+
+[source,shell script]
+----
+java -Dspring.profiles.active=local -jar ./target/loan-service.jar
+
+----
+
+* Note, this will also set the active profile to local and application will run into ``8080`` port.
+
+
+== Endpoint
+
+=== OpenAPI specification
+
+After the application being started you can find the API specification at the following url:
+
+----
+http://localhost:8080/swagger-ui/index.html#/
+----
+
+=== Actuator endpoint
+
+You can check the application health with this endpoint:
+
+[source,shell script]
+----
+http://localhost:8080/actuator/health      [GET]
+----
+
+== Docker
+This project contains a Dockerfile and the k8s files to generate and orchestrate the docker images.
+
+== Future Features
+- Integration with a monitoring provider (the application is already providing the metrics via micrometer library).
+- Add more unit test.

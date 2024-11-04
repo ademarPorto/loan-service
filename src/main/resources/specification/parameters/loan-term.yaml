@@ -1,0 +1,8 @@
+name: loan-term
+in: query
+required: true
+schema:
+  type: integer
+  minimum: 0
+  maximum: 30
+description: The number of years to repay the loan.

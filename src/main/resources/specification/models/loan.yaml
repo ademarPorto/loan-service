@@ -1,0 +1,36 @@
+components:
+  schemas:
+    Loan:
+      type: object
+      properties:
+        loan_id:
+          description: Internal identification
+          type: string
+          format: uuid
+          example: '95538fe2-31cf-414b-89e2-879609e9812a'
+        loan_value:
+          description: The loan Amount.
+          type: number
+          minimum: 0
+        interest_rate:
+          description: The interest Rate.
+          type: number
+          minimum: 0
+          maximum: 100
+        loan_term:
+          description: The loan term.
+          type: integer
+          minimum: 0
+          maximum: 30
+        monthly_payment:
+          description: The monthly payment.
+          type: number
+        loan_type:
+          $ref: "loan-type.yaml#/components/schemas/LoanType"
+        created_date:
+          description: The loan's created date.
+          type: date
+      required:
+        - loanValue
+        - interestRate
+        - loanTerm

@@ -1,0 +1,7 @@
+name: loan-value
+in: query
+required: true
+schema:
+  type: number
+  minimum: 0
+description: The total amount borrowed.

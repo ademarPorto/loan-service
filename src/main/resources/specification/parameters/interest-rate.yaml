@@ -1,0 +1,8 @@
+name: interest-rate
+in: query
+required: true
+schema:
+  type: number
+  minimum: 0
+  maximum: 100
+description: The annual interest rate charged on the loan.

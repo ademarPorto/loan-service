@@ -1,0 +1,7 @@
+components:
+  schemas:
+    LoanCalculationResponse:
+      type: object
+      properties:
+        emi:
+          type: number

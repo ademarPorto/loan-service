@@ -1,0 +1,41 @@
+info:
+  name: '@project.name@'
+  version: '@project.version@'
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/loan-db
+    username: user
+    password: password
+  database:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    micrometer:
+      enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

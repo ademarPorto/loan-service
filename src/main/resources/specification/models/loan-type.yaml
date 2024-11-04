@@ -1,0 +1,11 @@
+components:
+  schemas:
+    LoanType:
+      title: The Loan type
+      description: The loan's type.
+      type: string
+      enum:
+        - HOME
+        - CAR
+        - BIKE
+        - PERSONAL
