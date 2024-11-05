@@ -119,6 +119,10 @@ http://localhost:8080/actuator/health      [GET]
 This project contains a Dockerfile and the k8s files to generate and orchestrate the docker images.
 
 == Future Features
-- Integration with a monitoring provider (the application is already providing the metrics via micrometer library).
+- Integration with a monitoring provider (the application already provides the metrics via the micrometer library).
+- Integration with sonar for code quality.
+- Integration with an artifact repository such as Nexus, JFrog, and others.
+- Integration with Splunk to leverage observability, alerts, and logging.
+- Vault to manage the application secrets.
+- Unit tests in the repository layer.
 - Increase the code coverage and add more unit tests.
-- Develop the FrontEnd application and create E2E tests to test the solution as a whole.
