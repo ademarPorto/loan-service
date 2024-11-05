@@ -120,4 +120,5 @@ This project contains a Dockerfile and the k8s files to generate and orchestrate
 
 == Future Features
 - Integration with a monitoring provider (the application is already providing the metrics via micrometer library).
-- Add more unit test.
+- Increase the code coverage and add more unit tests.
+- Develop the FrontEnd application and create E2E tests to test the solution as a whole.
